@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clock</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function startTime(){
+            var today = new Date();
+            var h=today.getHours();
+            var m=today.getMinutes();
+            var s=today.getSeconds();
+
+            var yy=today.getFullYear();
+            var mm=today.getMonth();
+            var dd=today.getDate();
+
+            h = checkTime(h);
+            m = checkTime(m);
+            s = checkTime(s);
+
+            bar = updateBar(s);
+
+            mm = checkDate(mm);
+            dd = checkDate(dd);
+
+            document.getElementById("date").innerHTML =
+            yy + "-" + mm + "-" + dd;
+
+            document.getElementById("time").innerHTML =
+            h + ":" + m + ":" + s;
+
+            var t = setTimeout(startTime, 1000);
+        }
+
+        function checkTime(i){
+            if(i<10){
+                i = "0" + i;
+            }//add zero infront if < 10
+            return i;
+        }
+        function checkDate(x){
+            if(x<10){
+                x = "0" + x;
+            }
+            return x;
+        }
+        function updateBar(z){
+           //change to percentage
+            var percent = z/60 * 100;
+            document.getElementById("myBar").style.width=percent + "%";
+        }
+    </script>
+</head>
+<body onload="startTime()">
+    <div id="clock">
+        <div id="date"></div>
+        <div id="time"></div>
+        <p>Digital Clock with Pure JS</p>
+        <div id="myProgress">
+            <div id="myBar"></div>
+        </div>
+    </div>
+</body>
+</html>
